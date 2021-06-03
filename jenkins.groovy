@@ -1,4 +1,7 @@
 node(){
+    job('Pipeline_Job'){
+        description('first job as infrastructure as a code')
+    }
     stage('git clone'){
         git branch: 'master'
         git url: 'https://github.com/Srk-771/test-project-1.git'

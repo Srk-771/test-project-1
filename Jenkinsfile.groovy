@@ -9,7 +9,7 @@ node(){
     stage('pollscm') {
         poll: '* * * * *'
     }
-    steps {
+    stage {
         sh 'clean package', 'mvn -f pom.xml'
     }
 }

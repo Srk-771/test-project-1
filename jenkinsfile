@@ -1,15 +1,18 @@
-job('Pipeline_Job'){
-    description('first job as infrastructure as a code')
-    
-    scm ('git clone'){
-        url: 'https://github.com/Srk-771/test-project-1.git'
-    }
-    triggers ('polscm'){
-    	scm('* * * * *')
-    }
+pipeline {
+    agent any
+    stages {
+        stage('Build Application') {
+            steps {
+                sh 'mvn pom.xml clean package'
+            }
+            post {
+                success {
 
-    stage('mvn'){
-        maven ('pom.xml','clean package')
+                    echo "Now Archiving the Artifacts...."
+                    sshPublisher publishers: configName: 'Admin', sourceFiles: '**/*.war', remoteDirectory: '.'
+                }
+            }
+        
+        }        
     }
-   
 }

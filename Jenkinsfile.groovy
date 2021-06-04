@@ -10,7 +10,7 @@ node(){
         poll: '* * * * *'
     }
     stage('maven build') {
-        sh 'clean package'
+        sh 'mvn clean install'
     }
 }
 

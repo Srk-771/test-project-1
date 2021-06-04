@@ -2,7 +2,7 @@ job('Pipeline_Job'){
     description('first job as infrastructure as a code')
     
     scm ('git clone'){
-        url: 'https://github.com/Srk-771/test-project-1.git',master 
+        url: 'https://github.com/Srk-771/test-project-1.git'
     }
     triggers ('polscm'){
     	scm('* * * * *')

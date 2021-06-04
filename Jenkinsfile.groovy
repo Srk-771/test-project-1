@@ -6,8 +6,8 @@ node(){
     stage('git clone') {
         git: 'https://github.com/Srk-771/test-project-1.git'
     }
-    triggers {
-        scm: '* * * * *'
+    stage('pollscm') {
+        poll: '* * * * *'
     }
     steps {
         sh 'clean package', 'mvn -f pom.xml'

@@ -9,7 +9,7 @@ node(){
     stage('pollscm') {
         poll: '* * * * *'
     }
-    stage {
+    stage('maven build') {
         sh 'clean package', 'mvn -f pom.xml'
     }
 }

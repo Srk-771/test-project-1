@@ -1,16 +1,15 @@
-node(){
-    job('Pipeline_Job'){
-        description('first job as infrastructure as a code')
+job('Pipeline_Job'){
+    description('first job as infrastructure as a code')
+    
+    scm ('git clone'){
+        url: 'https://github.com/Srk-771/test-project-1.git',master 
     }
-    stage('git clone'){
-        git branch: 'master'
-        git url: 'https://github.com/Srk-771/test-project-1.git'
-        pollSCM: '* * * * *' 
+    triggers ('polscm'){
+    	scm('* * * * *')
     }
+
     stage('mvn'){
-        sh 'M2_HOME pom.xml clean package'
+        maven ('pom.xml','clean package')
     }
-    stage('Send build artifacts over SSH'){
-        publishers: configName: 'Testing-Host', sourceFiles: 'webapp/target/*.war', removePrefix: 'webapp/target', remoteDirectory: '.'
-    }
+   
 }
